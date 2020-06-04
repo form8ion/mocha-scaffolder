@@ -37,7 +37,7 @@ suite('mocha scaffolder', () => {
     );
     assert.calledWith(
       fsPromises.copyFile,
-      path.resolve(__dirname, '../../', 'templates', 'canary-test.txt'),
+      path.resolve(__dirname, '..', 'templates', 'canary-test.txt'),
       `${pathToCreatedSrcDirectory}/canary-test.js`
     );
     assert.calledWith(
@@ -47,7 +47,7 @@ suite('mocha scaffolder', () => {
     );
     assert.calledWith(
       fsPromises.copyFile,
-      path.resolve(__dirname, '../../', 'templates', 'mocha-setup.txt'),
+      path.resolve(__dirname, '..', 'templates', 'mocha-setup.txt'),
       `${pathToCreatedTestDirectory}/mocha-setup.js`
     );
   });

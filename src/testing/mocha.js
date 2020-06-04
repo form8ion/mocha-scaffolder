@@ -1,6 +1,6 @@
 import {promises as fsPromises} from 'fs';
+import path from 'path';
 import mkdir from '../../third-party-wrappers/make-dir';
-import determinePathToTemplateFile from '../template-path';
 
 export default async function ({projectRoot}) {
   const {copyFile, writeFile} = fsPromises;
@@ -10,12 +10,12 @@ export default async function ({projectRoot}) {
   ]);
 
   await Promise.all([
-    copyFile(determinePathToTemplateFile('canary-test.txt'), `${createdSrcDirectory}/canary-test.js`),
+    copyFile(path.resolve(__dirname, '..', 'templates', 'canary-test.txt'), `${createdSrcDirectory}/canary-test.js`),
     writeFile(
       `${projectRoot}/.mocharc.json`,
       JSON.stringify({ui: 'tdd', require: ['@babel/register', './test/mocha-setup.js']})
     ),
-    copyFile(determinePathToTemplateFile('mocha-setup.txt'), `${createdTestDirectory}/mocha-setup.js`)
+    copyFile(path.resolve(__dirname, '..', 'templates', 'mocha-setup.txt'), `${createdTestDirectory}/mocha-setup.js`)
   ]);
 
   return {
