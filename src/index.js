@@ -1,1 +1,1 @@
-export {default} from './mocha';
+export {default as scaffold} from './mocha';
