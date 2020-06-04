@@ -35,8 +35,16 @@ $ npm install @form8ion/mocha-scaffolder --save-dev
 
 ### Example
 
+#### Import
+
 ```javascript
-import mochaScaffolder from '@form8ion/mocha-scaffolder';
+import {scaffold} from '@form8ion/mocha-scaffolder';
+```
+
+```javascript
+(async () => {
+  await scaffold({projectRoot: process.cwd()});
+})();
 ```
 
 ## Contributing
