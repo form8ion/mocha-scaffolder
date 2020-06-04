@@ -3,7 +3,7 @@ import path from 'path';
 import {assert} from 'chai';
 import any from '@travi/any';
 import sinon from 'sinon';
-import * as mkdir from '../../third-party-wrappers/make-dir';
+import * as mkdir from '../thirdparty-wrappers/make-dir';
 import scaffoldMocha from './mocha';
 
 suite('mocha scaffolder', () => {

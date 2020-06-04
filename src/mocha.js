@@ -1,6 +1,6 @@
 import {promises as fsPromises} from 'fs';
 import path from 'path';
-import mkdir from '../../third-party-wrappers/make-dir';
+import mkdir from '../thirdparty-wrappers/make-dir';
 
 export default async function ({projectRoot}) {
   const {copyFile, writeFile} = fsPromises;
