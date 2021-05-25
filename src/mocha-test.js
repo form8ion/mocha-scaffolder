@@ -23,6 +23,7 @@ suite('mocha scaffolder', () => {
   test('that mocha is scaffolded', async () => {
     const pathToCreatedTestDirectory = any.string();
     const pathToCreatedSrcDirectory = any.string();
+    const eslintConfigs = ['mocha'];
     mkdir.default.withArgs(`${projectRoot}/src`).resolves(pathToCreatedSrcDirectory);
     mkdir.default.withArgs(`${projectRoot}/test`).resolves(pathToCreatedTestDirectory);
 
@@ -31,7 +32,8 @@ suite('mocha scaffolder', () => {
       {
         devDependencies: ['mocha', 'chai', 'sinon'],
         scripts: {'test:unit:base': "DEBUG=any mocha 'src/**/*-test.js'"},
-        eslintConfigs: ['mocha'],
+        eslintConfigs,
+        eslint: {configs: eslintConfigs},
         nextSteps: [{summary: 'Remove the canary test for mocha once more valuable tests exist'}]
       }
     );
