@@ -48,7 +48,7 @@
     "@travi/any": "2.0.19",
     "ban-sensitive-files": "1.9.17",
     "c8": "7.11.0",
-    "chai": "4.3.5",
+    "chai": "4.3.6",
     "cross-env": "7.0.3",
     "cz-conventional-changelog": "3.3.0",
     "husky": "7.0.4",
