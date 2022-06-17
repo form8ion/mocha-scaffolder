@@ -1,8 +1,12 @@
 import {promises as fsPromises} from 'fs';
 import path from 'path';
+import {fileTypes} from '@form8ion/core';
+import * as configFile from '@form8ion/config-file';
+
 import {assert} from 'chai';
 import any from '@travi/any';
 import sinon from 'sinon';
+
 import * as mkdir from '../thirdparty-wrappers/make-dir';
 import scaffoldMocha from './mocha';
 
@@ -15,7 +19,7 @@ suite('mocha scaffolder', () => {
 
     sandbox.stub(mkdir, 'default');
     sandbox.stub(fsPromises, 'copyFile');
-    sandbox.stub(fsPromises, 'writeFile');
+    sandbox.stub(configFile, 'write');
   });
 
   teardown(() => sandbox.restore());
@@ -45,9 +49,13 @@ suite('mocha scaffolder', () => {
       `${pathToCreatedSrcDirectory}/canary-test.js`
     );
     assert.calledWith(
-      fsPromises.writeFile,
-      `${projectRoot}/.mocharc.json`,
-      JSON.stringify({ui: 'tdd', require: ['@babel/register', './test/mocha-setup.js']})
+      configFile.write,
+      {
+        format: fileTypes.JSON,
+        path: projectRoot,
+        name: 'mocha',
+        config: {ui: 'tdd', require: ['@babel/register', './test/mocha-setup.js']}
+      }
     );
     assert.calledWith(
       fsPromises.copyFile,

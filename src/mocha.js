@@ -1,5 +1,8 @@
 import {promises as fs} from 'fs';
 import path from 'path';
+import {fileTypes} from '@form8ion/core';
+import {write} from '@form8ion/config-file';
+
 import mkdir from '../thirdparty-wrappers/make-dir';
 
 export default async function ({projectRoot}) {
@@ -12,10 +15,12 @@ export default async function ({projectRoot}) {
 
   await Promise.all([
     fs.copyFile(path.resolve(__dirname, '..', 'templates', 'canary-test.txt'), `${createdSrcDirectory}/canary-test.js`),
-    fs.writeFile(
-      `${projectRoot}/.mocharc.json`,
-      JSON.stringify({ui: 'tdd', require: ['@babel/register', './test/mocha-setup.js']})
-    ),
+    write({
+      format: fileTypes.JSON,
+      path: projectRoot,
+      name: 'mocha',
+      config: {ui: 'tdd', require: ['@babel/register', './test/mocha-setup.js']}
+    }),
     fs.copyFile(path.resolve(__dirname, '..', 'templates', 'mocha-setup.txt'), `${createdTestDirectory}/mocha-setup.js`)
   ]);
 
