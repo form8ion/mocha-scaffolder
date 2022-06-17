@@ -7,7 +7,6 @@ import mkdir from '../thirdparty-wrappers/make-dir';
 
 export default async function ({projectRoot}) {
   const testFilenamePattern = 'src/**/*-test.js';
-  const eslintConfigs = ['mocha'];
   const [createdTestDirectory, createdSrcDirectory] = await Promise.all([
     mkdir(`${projectRoot}/test`),
     mkdir(`${projectRoot}/src`)
@@ -28,8 +27,7 @@ export default async function ({projectRoot}) {
     testFilenamePattern,
     devDependencies: ['mocha', 'chai', 'sinon'],
     scripts: {'test:unit:base': `DEBUG=any mocha '${testFilenamePattern}'`},
-    eslintConfigs,
-    eslint: {configs: eslintConfigs},
+    eslint: {configs: ['mocha']},
     nextSteps: [{summary: 'Remove the canary test for mocha once more valuable tests exist'}]
   };
 }
