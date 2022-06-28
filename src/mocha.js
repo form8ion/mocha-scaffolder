@@ -1,9 +1,12 @@
 import {promises as fs} from 'fs';
 import path from 'path';
+import filedirname from 'filedirname';
 import {fileTypes} from '@form8ion/core';
 import {write} from '@form8ion/config-file';
 
 import mkdir from '../thirdparty-wrappers/make-dir';
+
+const [, __dirname] = filedirname();
 
 export default async function ({projectRoot}) {
   const testFilenamePattern = 'src/**/*-test.js';

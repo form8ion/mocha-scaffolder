@@ -48,7 +48,8 @@
     "lint:engines": "ls-engines",
     "lint:gherkin": "gherkin-lint",
     "test:integration": "run-s 'test:integration:base -- --profile noWip'",
-    "test:integration:base": "NODE_OPTIONS=--enable-source-maps DEBUG=any cucumber-js test/integration --profile base",
+    "pretest:integration:base": "run-s build",
+    "test:integration:base": "NODE_OPTIONS=\"--loader=testdouble --enable-source-maps\" DEBUG=any cucumber-js test/integration",
     "test:integration:debug": "DEBUG=test run-s test:integration",
     "test:integration:wip": "run-s 'test:integration:base -- --profile wip'",
     "test:integration:wip:debug": "DEBUG=test run-s 'test:integration:wip'",
@@ -82,11 +83,13 @@
     "rimraf": "3.0.2",
     "rollup": "2.75.7",
     "rollup-plugin-auto-external": "2.0.0",
-    "sinon": "14.0.0"
+    "sinon": "14.0.0",
+    "testdouble": "3.16.6"
   },
   "dependencies": {
     "@form8ion/config-file": "^1.0.1",
     "@form8ion/core": "^1.8.0",
+    "filedirname": "^2.7.0",
     "make-dir": "^3.1.0"
   }
 }
