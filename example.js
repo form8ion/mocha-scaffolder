@@ -1,11 +1,10 @@
 // #### Import
-// remark-usage-ignore-next 2
-import {resolve} from 'path';
+// remark-usage-ignore-next
 import stubbedFs from 'mock-fs';
 import {scaffold} from './lib/index.js';
 
 // remark-usage-ignore-next
-stubbedFs({templates: stubbedFs.load(resolve(...[__dirname, 'templates']))});
+stubbedFs({templates: stubbedFs.load('templates')});
 
 (async () => {
   await scaffold({projectRoot: process.cwd()});

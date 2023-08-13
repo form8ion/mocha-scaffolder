@@ -1,10 +1,10 @@
-import {promises as fs} from 'fs';
-import path from 'path';
+import {promises as fs} from 'node:fs';
+import path from 'node:path';
 import filedirname from 'filedirname';
 import {fileTypes} from '@form8ion/core';
 import {write} from '@form8ion/config-file';
 
-import mkdir from '../thirdparty-wrappers/make-dir';
+import mkdir from '../thirdparty-wrappers/make-dir.js';
 
 const [, __dirname] = filedirname();
 

@@ -3,6 +3,7 @@
   "description": "opinionated scaffolder for Mocha",
   "license": "MIT",
   "version": "0.0.0-semantically-released",
+  "type": "module",
   "engines": {
     "node": ">=16"
   },
@@ -11,12 +12,8 @@
   "bugs": "https://github.com/form8ion/mocha-scaffolder/issues",
   "homepage": "https://npm.im/@form8ion/mocha-scaffolder",
   "runkitExampleFilename": "./example.js",
-  "exports": {
-    "require": "./lib/index.js",
-    "import": "./lib/index.mjs"
-  },
+  "exports": "./lib/index.js",
   "main": "./lib/index.js",
-  "module": "./lib/index.mjs",
   "sideEffects": false,
   "scripts": {
     "pretest": "run-s build",
@@ -34,7 +31,7 @@
     "watch": "run-s 'build:js -- --watch'",
     "prepack": "run-s build",
     "test:unit": "cross-env NODE_ENV=test c8 run-s test:unit:base",
-    "test:unit:base": "DEBUG=any mocha 'src/**/*-test.js'",
+    "test:unit:base": "DEBUG=any mocha --loader=testdouble 'src/**/*-test.js'",
     "lint:peer": "npm ls >/dev/null",
     "prepare": "husky install",
     "lint:engines": "ls-engines",
@@ -62,9 +59,7 @@
     "make-dir": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/register": "7.22.5",
     "@cucumber/cucumber": "9.4.0",
-    "@form8ion/babel-preset": "1.6.108",
     "@form8ion/commitlint-config": "1.0.55",
     "@form8ion/eslint-config": "6.0.1",
     "@form8ion/eslint-config-cucumber": "1.4.1",
@@ -89,7 +84,6 @@
     "rimraf": "5.0.1",
     "rollup": "2.79.1",
     "rollup-plugin-auto-external": "2.0.0",
-    "sinon": "15.2.0",
     "testdouble": "3.18.0"
   }
 }
