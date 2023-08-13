@@ -5,6 +5,7 @@ opinionated scaffolder for [Mocha](https://mochajs.org/)
 <!--status-badges start -->
 
 [![Node CI Workflow Status][github-actions-ci-badge]][github-actions-ci-link]
+![SLSA Level 2][slsa-badge]
 
 <!--status-badges end -->
 
@@ -111,3 +112,5 @@ $ npm test
 [github-actions-ci-badge]: https://github.com/form8ion/mocha-scaffolder/workflows/Node.js%20CI/badge.svg
 
 [node-badge]: https://img.shields.io/node/v/@form8ion/mocha-scaffolder?logo=node.js
+
+[slsa-badge]: https://slsa.dev/images/gh-badge-level2.svg
