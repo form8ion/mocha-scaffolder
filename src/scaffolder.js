@@ -5,20 +5,20 @@ import filedirname from 'filedirname';
 import mkdir from '../thirdparty-wrappers/make-dir.js';
 
 import {scaffold as scaffoldConfig} from './configuration/index.js';
+import {scaffold as scaffoldCanary} from './canary/index.js';
 
 const [, __dirname] = filedirname();
 
 export default async function ({projectRoot}) {
   const testFilenamePattern = 'src/**/*-test.js';
-  const [createdTestDirectory, createdSrcDirectory] = await Promise.all([
-    mkdir(`${projectRoot}/test`),
-    mkdir(`${projectRoot}/src`)
-  ]);
 
   await Promise.all([
-    fs.copyFile(path.resolve(__dirname, '..', 'templates', 'canary-test.txt'), `${createdSrcDirectory}/canary-test.js`),
+    scaffoldCanary({projectRoot}),
     scaffoldConfig({projectRoot}),
-    fs.copyFile(path.resolve(__dirname, '..', 'templates', 'mocha-setup.txt'), `${createdTestDirectory}/mocha-setup.js`)
+    fs.copyFile(
+      path.resolve(__dirname, '..', 'templates', 'mocha-setup.txt'),
+      `${(await mkdir(`${projectRoot}/test`))}/mocha-setup.js`
+    )
   ]);
 
   return {

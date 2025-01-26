@@ -8,13 +8,14 @@ import * as td from 'testdouble';
 const [, __dirname] = filedirname();
 
 suite('mocha scaffolder', () => {
-  let mkdir, config, fs, scaffoldMocha;
+  let mkdir, config, fs, scaffoldMocha, canary;
   const projectRoot = any.string();
 
   setup(async () => {
     mkdir = await td.replaceEsm('../thirdparty-wrappers/make-dir.js');
     fs = await td.replaceEsm('node:fs');
     config = await td.replaceEsm('./configuration/index.js');
+    canary = await td.replaceEsm('./canary/index.js');
 
     ({default: scaffoldMocha} = (await import('./scaffolder.js')));
   });
@@ -39,16 +40,11 @@ suite('mocha scaffolder', () => {
       }
     );
     td.verify(config.scaffold({projectRoot}));
+    td.verify(canary.scaffold({projectRoot}));
     td.verify(
       fs.promises.copyFile(
         path.resolve(__dirname, '..', 'templates', 'mocha-setup.txt'),
         `${pathToCreatedTestDirectory}/mocha-setup.js`
-      )
-    );
-    td.verify(
-      fs.promises.copyFile(
-        path.resolve(__dirname, '..', 'templates', 'canary-test.txt'),
-        `${pathToCreatedSrcDirectory}/canary-test.js`
       )
     );
   });
