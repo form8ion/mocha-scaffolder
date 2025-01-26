@@ -42,12 +42,14 @@ $ npm install @form8ion/mocha-scaffolder --save-dev
 #### Import
 
 ```javascript
-import {scaffold} from '@form8ion/mocha-scaffolder';
+import {scaffold, remove} from '@form8ion/mocha-scaffolder';
 ```
 
 ```javascript
 (async () => {
   await scaffold({projectRoot: process.cwd()});
+
+  await remove({projectRoot: process.cwd()});
 })();
 ```
 
