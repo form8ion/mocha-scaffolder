@@ -1,1 +1,1 @@
-export {default as scaffold} from './mocha.js';
+export {default as scaffold} from './scaffolder.js';
