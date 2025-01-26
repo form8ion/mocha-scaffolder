@@ -21,5 +21,5 @@ Then('the testing framework is configured', async function () {
 
 Then('configuration files are removed', async function () {
   assert.isFalse(await fileExists(`${this.projectRoot}/.mocharc.json`));
-  // assert.isFalse(await fileExists(`${this.projectRoot}/test/mocha-setup.js`));
+  assert.isFalse(await fileExists(`${this.projectRoot}/test/mocha-setup.js`));
 });
