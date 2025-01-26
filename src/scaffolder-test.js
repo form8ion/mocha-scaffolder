@@ -17,7 +17,7 @@ suite('mocha scaffolder', () => {
     configFile = await td.replaceEsm('@form8ion/config-file');
     fs = await td.replaceEsm('node:fs');
 
-    ({default: scaffoldMocha} = (await import('./mocha.js')));
+    ({default: scaffoldMocha} = (await import('./scaffolder.js')));
   });
 
   teardown(() => td.reset());
