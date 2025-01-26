@@ -43,7 +43,8 @@
     "test:integration:wip": "run-s 'test:integration:base -- --profile wip'",
     "test:integration:wip:debug": "DEBUG=test run-s 'test:integration:wip'",
     "test:integration:focus": "run-s 'test:integration:base -- --profile focus'",
-    "lint:publish": "publint --strict"
+    "lint:publish": "publint --strict",
+    "lint:js:fix": "run-s 'lint:js -- --fix'"
   },
   "files": [
     "example.js",
