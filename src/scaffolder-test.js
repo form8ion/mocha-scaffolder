@@ -1,6 +1,5 @@
 import path from 'node:path';
 import filedirname from 'filedirname';
-import {fileTypes} from '@form8ion/core';
 
 import {assert} from 'chai';
 import any from '@travi/any';
@@ -9,13 +8,13 @@ import * as td from 'testdouble';
 const [, __dirname] = filedirname();
 
 suite('mocha scaffolder', () => {
-  let mkdir, configFile, fs, scaffoldMocha;
+  let mkdir, config, fs, scaffoldMocha;
   const projectRoot = any.string();
 
   setup(async () => {
     mkdir = await td.replaceEsm('../thirdparty-wrappers/make-dir.js');
-    configFile = await td.replaceEsm('@form8ion/config-file');
     fs = await td.replaceEsm('node:fs');
+    config = await td.replaceEsm('./configuration/index.js');
 
     ({default: scaffoldMocha} = (await import('./scaffolder.js')));
   });
@@ -39,14 +38,7 @@ suite('mocha scaffolder', () => {
         nextSteps: [{summary: 'Remove the canary test for mocha once more valuable tests exist'}]
       }
     );
-    td.verify(
-      configFile.write({
-        format: fileTypes.JSON,
-        path: projectRoot,
-        name: 'mocha',
-        config: {ui: 'tdd', require: ['@babel/register', './test/mocha-setup.js']}
-      })
-    );
+    td.verify(config.scaffold({projectRoot}));
     td.verify(
       fs.promises.copyFile(
         path.resolve(__dirname, '..', 'templates', 'mocha-setup.txt'),
