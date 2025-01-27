@@ -3,11 +3,10 @@ import any from '@travi/any';
 import * as td from 'testdouble';
 
 suite('mocha scaffolder', () => {
-  let mkdir, config, scaffoldMocha, canary, setupFile;
+  let config, scaffoldMocha, canary, setupFile;
   const projectRoot = any.string();
 
   setup(async () => {
-    mkdir = await td.replaceEsm('../thirdparty-wrappers/make-dir.js');
     config = await td.replaceEsm('./configuration/index.js');
     canary = await td.replaceEsm('./canary/index.js');
     setupFile = await td.replaceEsm('./setup/index.js');
@@ -18,11 +17,7 @@ suite('mocha scaffolder', () => {
   teardown(() => td.reset());
 
   test('that mocha is scaffolded', async () => {
-    const pathToCreatedTestDirectory = any.string();
-    const pathToCreatedSrcDirectory = any.string();
     const testFilenamePattern = 'src/**/*-test.js';
-    td.when(mkdir.default(`${projectRoot}/src`)).thenResolve(pathToCreatedSrcDirectory);
-    td.when(mkdir.default(`${projectRoot}/test`)).thenResolve(pathToCreatedTestDirectory);
 
     assert.deepEqual(
       await scaffoldMocha({projectRoot}),
