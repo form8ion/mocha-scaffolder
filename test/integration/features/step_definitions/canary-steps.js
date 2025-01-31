@@ -6,7 +6,7 @@ import {assert} from 'chai';
 import any from '@travi/any';
 
 Given('the canary test still exists', async function () {
-  await fs.mkdir(`${this.projectRoot}/src`);
+  await fs.mkdir(`${this.projectRoot}/src`, {recursive: true});
   await fs.writeFile(`${this.projectRoot}/src/canary-test.js`, any.string());
 });
 

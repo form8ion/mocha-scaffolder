@@ -20,7 +20,7 @@ suite('canary test scaffolder', () => {
 
     await scaffoldCanary({projectRoot});
 
-    td.verify(fs.promises.mkdir(`${projectRoot}/src`));
+    td.verify(fs.promises.mkdir(`${projectRoot}/src`, {recursive: true}));
     td.verify(fs.promises.copyFile(pathToCanaryTemplate, `${projectRoot}/src/canary-test.js`));
   });
 });
