@@ -1,7 +1,7 @@
 import {resolve} from 'path';
 import filedirname from 'filedirname';
 // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
-import {scaffold, remove} from '@form8ion/mocha-scaffolder';
+import {scaffold, lift, test, remove} from '@form8ion/mocha-scaffolder';
 
 import {Before, When} from '@cucumber/cucumber';
 import stubbedFs from 'mock-fs';
@@ -20,6 +20,12 @@ Before(function () {
 
 When('the project is scaffolded', async function () {
   this.results = await scaffold({projectRoot: this.projectRoot});
+});
+
+When('the project is lifted', async function () {
+  if (await test({projectRoot: this.projectRoot})) {
+    this.results = await lift({projectRoot: this.projectRoot});
+  }
 });
 
 When('mocha is removed from the project', async function () {

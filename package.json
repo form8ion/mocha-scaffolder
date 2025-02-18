@@ -59,7 +59,8 @@
   "dependencies": {
     "@form8ion/config-file": "^1.0.1",
     "@form8ion/core": "^4.0.0",
-    "filedirname": "^3.0.0"
+    "filedirname": "^3.0.0",
+    "tinyglobby": "^0.2.11"
   },
   "devDependencies": {
     "@cucumber/cucumber": "11.2.0",

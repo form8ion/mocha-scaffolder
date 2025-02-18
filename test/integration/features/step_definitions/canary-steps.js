@@ -17,3 +17,7 @@ Then('a canary test exists to ensure the framework configuration works', async f
 Then('the canary test is removed', async function () {
   assert.isFalse(await fileExists(`${this.projectRoot}/src/canary-test.js`));
 });
+
+Then('the canary test is not removed', async function () {
+  assert.isTrue(await fileExists(`${this.projectRoot}/src/canary-test.js`));
+});
