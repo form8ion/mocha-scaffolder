@@ -1,5 +1,6 @@
 import any from '@travi/any';
 import * as td from 'testdouble';
+import {assert} from 'chai';
 
 suite('lifter', () => {
   let lift, liftCanary;
@@ -15,7 +16,7 @@ suite('lifter', () => {
   test('that the mocha details are lifted', async () => {
     const projectRoot = any.string();
 
-    await lift({projectRoot});
+    assert.deepEqual(await lift({projectRoot}), {});
 
     td.verify(liftCanary({projectRoot}));
   });
